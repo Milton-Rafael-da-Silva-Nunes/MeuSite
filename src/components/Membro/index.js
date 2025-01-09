@@ -5,34 +5,35 @@ class Membro extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            nome: props.nome
+            status: true
         };
 
-        this.entrar = this.entrar.bind(this);
         this.sair = this.sair.bind(this);
-    }
-
-    entrar() {
-        var usaurio = document.getElementById('nome').value;
-        this.setState({ nome: usaurio });
+        this.entrar = this.entrar.bind(this);
     }
 
     sair() {
-        this.setState({ nome: '' });
+        this.setState({status: false});
+    }
+
+    entrar() {
+        this.setState({status: true});
     }
 
     render() {
         return (
             <div>
-                <h2>Bem-vindo(a) {this.state.nome} </h2>
-                <input id="nome"></input>
-
-                <button onClick={this.entrar}>
-                    Entrar
-                </button>
-                <button onClick={this.sair}>
-                    Sair
-                </button>
+                {this.state.status ?
+                    <div>
+                        <h2>Bem-vindo(a)</h2>
+                        <button onClick={this.sair}>Sair do Sistemas</button>
+                    </div>
+                    :
+                    <div>
+                        <h2>Olá visitante, faça seu login!</h2>
+                        <button onClick={this.entrar}>Entrar no Sistemas</button>
+                    </div>
+                }
             </div>
         );
     }
