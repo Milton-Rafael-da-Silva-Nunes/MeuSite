@@ -1,31 +1,35 @@
-import React from "react";
+import React, { Component } from "react";
 
-const Equipe = (props) => {
-    return(
-        <div>
-            <Sobre userName={props.nome} cargo={props.cargo} idade={props.idade}/>
-            <MediaSocial fb={props.facebook}/>
-            <hr/>
-        </div>
-    );
+class Equipe extends Component {
+    render() {
+        return (
+            <div>
+                <Sobre nome={this.props.nome} cargo={this.props.cargo} idade={this.props.idade} />
+                <Social />
+                <hr />
+            </div>
+        );
+    }
 }
 
-const Sobre = (props) => {
-    return(
-        <div>
-            <h2>Olá sou o(a) {props.userName}</h2>
-            <h4>Cargo: {props.cargo}</h4>
-            <h4>idade: {props.idade}</h4>
-        </div>
-    );
+class Sobre extends Component {
+    render() {
+        return (
+            <div>
+                <h2>olá sou o(a) {this.props.nome} </h2>
+                <h3>Cargo: {this.props.cargo} </h3>
+                <h3>Idade: {this.props.idade} </h3>
+            </div>
+        );
+    }
 }
 
-const MediaSocial = (props) => {
-    return(
+const Social = () => {
+    return (
         <div>
-            <a href={props.fb}>Facebook </a>
-            <a>LinkedIn </a>
-            <a>YouTube </a>
+            <a href="http://facebook.com.br">Facebook </a>
+            <a href="http://linkedin.com.br">linkeIn </a>
+            <a href="http://youtube.com.br">Youtube </a>
         </div>
     );
 }
@@ -33,10 +37,10 @@ const MediaSocial = (props) => {
 function App() {
     return (
         <div>
-            <h1>Conheça nossa Equipe:</h1>    
-            <Equipe nome="Rafael" cargo="Programador" idade="28" facebook="http://google.com.br"/>  
-            <Equipe nome="José Maria" cargo="Agricultor" idade="65" facebook="http://google.com.br"/> 
-            <Equipe nome="Maria Clara" cargo="Manicure" idade="32" facebook="http://google.com.br"/>     
+            <h1>Conheça nossa Equipe:</h1>
+            <Equipe nome="Rafael" cargo="Programador" idade="28" />
+            <Equipe nome="Amanda" cargo="Frond-end" idade="22" />
+            <Equipe nome="Aynara" cargo="Agilista" idade="25" />
         </div>
     );
 }
