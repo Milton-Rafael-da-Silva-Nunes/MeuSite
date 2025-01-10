@@ -1,51 +1,39 @@
 import React, { Component } from "react";
-import './estilo.css';
+import './style.css';
 
 class App extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            textoFrase: ''
+            numero: 1
         };
 
-        this.quebraBiscoito = this.quebraBiscoito.bind(this);
+        this.iniciar = this.iniciar.bind(this);
+        this.limpar = this.limpar.bind(this);
+    }
 
-        this.frases = ['Siga os bons e aprenda com eles.', 
-            'O bom-senso vale mais do que muito conhecimento.',
-            'O riso é a menor distância entre duas pessoas.',
-            'Deixe de lado as preocupações e seja feliz.',
-            'Realize o óbvio, pense no improvável e conquiste o impossível.',
-            'Acredite em milagres, mas não dependa deles.',
-            'A maior barreira para o sucesso é o medo do fracasso.'];
+    iniciar() {
 
     }
 
-    quebraBiscoito() {
-        let state = this.state;
-        let numeroAleatorio = Math.floor(Math.random() * this.frases.length); // Sorteio um numero com base no tamanho do meu Array.
-        state.textoFrase = '"' + this.frases[numeroAleatorio] + '"'; // Adiciono ao meu 'tetoFrase' a frase com base na posição do Array sorteado.
-        this.setState(state); // Seto a frase escolhida para o meu State.
+    limpar() {
+        this.setState({numero: 0});
     }
 
     render() {
         return (
             <div className="container">
-                <img src={require('./assets/biscoito.png')} className="img"></img>
+                <img src={require('./assets/cronometro.png')} className="img" />
 
-                <Botao nome="Abrir Biscoito" acaoBtn={this.quebraBiscoito} />
+                <a className="timer"> {this.state.numero.toFixed(1)} </a>
 
-                <h3 className="textoFrase">{this.state.textoFrase}</h3>
-            </div>
-        );
-    }
-}
+                <div className="areaBtn">
 
-class Botao extends Component {
-    render() {
-        return (
-            <div>
-                <button onClick={this.props.acaoBtn}>{this.props.nome}</button>
+                    <a className="botao" onClick={this.iniciar}>iniciar</a>
+                    <a className="botao" onClick={this.limpar}>Limpar</a>
+
+                </div>
             </div>
         );
     }
