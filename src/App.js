@@ -5,61 +5,57 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            nome: '',
             email: '',
             senha: '',
-            sexo: 'masculino'
-
+            error: ''
         };
 
-        this.trocaEmail = this.trocaEmail.bind(this);
-        this.trocaSexo = this.trocaSexo.bind(this);
+        this.cadastrar = this.cadastrar.bind(this);
     }
 
-    trocaEmail(event) {
-        let valorDigitado = event.target.value;
-        this.setState({ email: valorDigitado });
+    cadastrar(event) {
+        const { nome, email, senha } = this.state;// Descontrução
 
-    }
-    trocaSexo(event) {
-        let valorSexo = event.target.value;
-        this.setState({ sexo: valorSexo });
+        if (nome !== '' && email !== '' && senha !== '') {
+            alert(`Nome: ${nome} \nE-mail: ${email} \nSenha: ${senha}`);
+        } else {
+            this.setState({ error: 'Ops! Preencha todos os campos' });
+        }
+
+        event.preventDefault(); // Não deixa apagar os campos digitados (mantem o padrão)
     }
 
     render() {
         return (
             <div>
-                <h2>Login</h2>
-                E-mail:
-                <input type="email" name="email" value={this.state.email}
-                    onChange={this.trocaEmail}></input>
 
-                <br />
+                <h1>Cadastro de Usuário</h1>
 
-                Senha:
-                <input type="password" name="senha" value={this.state.senha}
-                    onChange={(event) => this.setState({ senha: event.target.value })}>
-                </input>
+                {this.state.error && <p>* {this.state.error} *</p>}
 
-                <br />
+                <form onSubmit={this.cadastrar}>
+                    <label>Nome:</label>
+                    <input type="text" name="nome" value={this.state.nome}
+                        onChange={(event) => this.setState({ nome: event.target.value })}></input>
 
-                Sexo:
-                <select name="sexo" value={this.state.sexo} onChange={this.trocaSexo}>
-                    <option value="masculino">Masculino</option>
-                    <option value="feminino">Feminino</option>
-                </select>
+                    <br />
 
-                <div>
-                    <button>Login</button>
-                    <button>Sair</button>
-                </div>
+                    <label>E-mail:</label>
+                    <input type="text" name="email" value={this.state.email}
+                        onChange={(event) => this.setState({ email: event.target.value })}></input>
 
+                    <br />
 
-                <div>
-                    <h3>{this.state.email}</h3>
-                    <h3>{this.state.senha}</h3>
-                    <h3>{this.state.sexo}</h3>
-                </div>
+                    <label>Senha:</label>
+                    <input type="password" name="senha" value={this.state.senha}
+                        onChange={(event) => this.setState({ senha: event.target.value })}></input>
 
+                    <br />
+
+                    <button type="submit">Cadastrar</button>
+
+                </form>
 
             </div>
         );
