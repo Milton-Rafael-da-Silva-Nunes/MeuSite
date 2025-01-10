@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./App.css";
 
 class App extends Component {
 
@@ -32,7 +33,7 @@ class App extends Component {
 
                 <h1>Cadastro de Usuário</h1>
 
-                {this.state.error && <p>* {this.state.error} *</p>}
+                {this.state.error && <p id="error">* {this.state.error} *</p>}
 
                 <form onSubmit={this.cadastrar}>
                     <label>Nome:</label>
@@ -43,7 +44,7 @@ class App extends Component {
 
                     <label>E-mail:</label>
                     <input type="text" name="email" value={this.state.email}
-                        onChange={(event) => this.setState({ email: event.target.value })}></input>
+                        onChange={(event) => this.setState({ email: event.target.value })} id="email"></input>
 
                     <br />
 

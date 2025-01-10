@@ -1,0 +1,30 @@
+body {
+    background: rgb(166, 166, 168);
+}
+
+h1 {
+    color: white;
+}
+
+label {
+    color: black;
+    font-weight: bold;
+}
+
+input {
+    margin-left: 5pt;
+}
+
+input#email {
+    margin-left: 4pt;
+}
+
+button {
+    margin-top: 10px;
+    padding: 5px 86px;
+}
+
+p#error {
+    background: rgb(219, 95, 95);
+    margin-right: 380px;
+}
