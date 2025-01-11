@@ -6,19 +6,45 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            numero: 1
+            numero: 0,
+            botaotxt: 'INICIAR'
         };
 
+        this.timer = null;
         this.iniciar = this.iniciar.bind(this);
         this.limpar = this.limpar.bind(this);
     }
 
     iniciar() {
+        let state = this.state;
 
+        if (this.timer != null) {
+            clearInterval(this.timer);
+            this.timer = null;
+            state.botaotxt = 'INICIAR';
+        } else {
+            this.timer = setInterval(() => {
+                let state = this.state;
+                state.numero += 0.1;
+                this.setState(state);
+                state.botaotxt = 'PAUSE';
+            }, 100);
+        }
+
+        this.setState(state);
     }
 
     limpar() {
-        this.setState({numero: 0});
+        let state = this.state;
+
+        if (this.timer != null) {
+            clearInterval(this.timer);
+            this.timer = null;
+        }
+
+        state.numero = 0;
+        state.botaotxt = 'INICIAR';
+        this.setState(state);
     }
 
     render() {
@@ -30,8 +56,8 @@ class App extends Component {
 
                 <div className="areaBtn">
 
-                    <a className="botao" onClick={this.iniciar}>iniciar</a>
-                    <a className="botao" onClick={this.limpar}>Limpar</a>
+                    <a className="botao" onClick={this.iniciar}> {this.state.botaotxt} </a>
+                    <a className="botao" onClick={this.limpar}>LIMPAR</a>
 
                 </div>
             </div>
