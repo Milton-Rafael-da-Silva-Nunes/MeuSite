@@ -1,42 +1,35 @@
-import React, { Component } from "react";
-import './style.css';
+import React, { useState } from "react";
 
-class App extends Component {
+function App() {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            numero: 1
-        };
+    const [tarefas, setTarefas] = useState([
+        'Pagar a conta de Luz',
+        'Estudar ReactJS Hookas'
+    ]);
 
-        this.iniciar = this.iniciar.bind(this);
-        this.limpar = this.limpar.bind(this);
+    const [input, setInput] = useState('');
+
+    function handleAdd() {
+        setTarefas([...tarefas, input]);
+        setInput('');
     }
 
-    iniciar() {
+    return (
+        <div>
 
-    }
+            <ul>
+                {tarefas.map(tarefa => (
+                    <li key={tarefa}>
+                        {tarefa}
+                    </li>
+                ))}
+            </ul>
 
-    limpar() {
-        this.setState({numero: 0});
-    }
+            <input type="text" value={input} onChange={(e) => setInput(e.target.value)}></input>
+            <button type="button" onClick={handleAdd}>Adicionar</button>
 
-    render() {
-        return (
-            <div className="container">
-                <img src={require('./assets/cronometro.png')} className="img" />
-
-                <a className="timer"> {this.state.numero.toFixed(1)} </a>
-
-                <div className="areaBtn">
-
-                    <a className="botao" onClick={this.iniciar}>iniciar</a>
-                    <a className="botao" onClick={this.limpar}>Limpar</a>
-
-                </div>
-            </div>
-        );
-    }
+        </div>
+    );
 }
 
 export default App;
