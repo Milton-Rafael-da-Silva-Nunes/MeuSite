@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 
 function App() {
 
@@ -8,7 +8,7 @@ function App() {
     useEffect(() => {
         const tarefasStorage = localStorage.getItem('tarefas');
 
-        if(tarefasStorage) {
+        if (tarefasStorage) {
             setTarefas(JSON.parse(tarefasStorage));
         }
 
@@ -23,6 +23,10 @@ function App() {
         setInput('');
     }
 
+    // Use memo executa o LENGTH toda vez que ele for add
+    // Com isso não precisa executar o RETURN toda vez que for add uma tarefa nova.
+    const totalTarefas = useMemo(() => tarefas.length, [tarefas]);
+
     return (
         <div>
 
@@ -33,6 +37,10 @@ function App() {
                     </li>
                 ))}
             </ul>
+
+            <br />
+            <strong>Você tem {totalTarefas} tarefas!</strong>
+            <br />
 
             <input type="text" value={input} onChange={(e) => setInput(e.target.value)}></input>
             <button type="button" onClick={handleAdd}>Adicionar</button>
